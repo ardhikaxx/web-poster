@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edukasi Merata, Masa Depan Setara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #893D23;
+            --secondary-color: #7E3313;
+            --accent-color: #E8CA96;
+            --text-color: #333;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #E8CA96, #CD9848);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./assets/background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .title-capsule {
+            background-color: white;
+            color: #7E3313;
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2.5rem;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f3d9ad;
+            max-width: 90%;
+            font-size: clamp(1.5rem, 4vw, 2.8rem);
+        }
+
+        .subtitle-capsule {
+            background-color: #893D23;
+            color: white;
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            text-align: center;
+            width: 100%;
+        }
+
+        .source-capsule {
+            background-color: #893D23;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .source-capsule:hover {
+            background-color: #7E3313;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card {
+            background-color: white;
+            color: #893D23;
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #893D23;
+            padding: 1.5rem;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .floating-paper {
+            position: absolute;
+            opacity: 0.85;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+            filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Kertas di sisi kiri */
+        .paper-left-1 {
+            width: 50px;
+            top: 15%;
+            left: 3%;
+            animation-delay: 0s;
+            transform: rotate(-5deg);
+        }
+
+        .paper-left-2 {
+            width: 65px;
+            top: 35%;
+            left: 5%;
+            animation-delay: -2s;
+            transform: rotate(12deg);
+        }
+
+        .paper-left-3 {
+            width: 60px;
+            top: 55%;
+            left: 2%;
+            animation-delay: -4s;
+            transform: rotate(-15deg);
+        }
+
+        .paper-left-4 {
+            width: 65px;
+            top: 75%;
+            left: 4%;
+            animation-delay: -6s;
+            transform: rotate(8deg);
+        }
+
+        .paper-left-5 {
+            width: 55px;
+            top: 85%;
+            left: 6%;
+            animation-delay: -8s;
+            transform: rotate(-10deg);
+        }
+
+        /* Kertas di sisi kanan */
+        .paper-right-1 {
+            width: 70px;
+            top: 10%;
+            right: 4%;
+            animation-delay: -1s;
+            transform: rotate(15deg);
+        }
+
+        .paper-right-2 {
+            width: 65px;
+            top: 25%;
+            right: 2%;
+            animation-delay: -3s;
+            transform: rotate(-8deg);
+        }
+
+        .paper-right-3 {
+            width: 75px;
+            top: 45%;
+            right: 5%;
+            animation-delay: -5s;
+            transform: rotate(5deg);
+        }
+
+        .paper-right-4 {
+            width: 60px;
+            top: 65%;
+            right: 3%;
+            animation-delay: -7s;
+            transform: rotate(-12deg);
+        }
+
+        .paper-right-5 {
+            width: 65px;
+            top: 80%;
+            right: 6%;
+            animation-delay: -9s;
+            transform: rotate(10deg);
+        }
+
+        /* Kertas tambahan untuk lebih banyak variasi */
+        .paper-center-1 {
+            width: 50px;
+            top: 13%;
+            left: 55%;
+            animation-delay: -2.5s;
+            transform: rotate(20deg);
+        }
+
+        .paper-center-2 {
+            width: 65px;
+            top: 54%;
+            left: 60%;
+            animation-delay: -5.5s;
+            transform: rotate(-18deg);
+        }
+
+        .paper-center-3 {
+            width: 55px;
+            top: 70%;
+            left: 46%;
+            animation-delay: -7.5s;
+            transform: rotate(15deg);
+        }
+
+        .paper-center-4 {
+            width: 70px;
+            top: 35%;
+            left: 45%;
+            animation-delay: -1.5s;
+            transform: rotate(-22deg);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(var(--initial-rotation));
+            }
+
+            25% {
+                transform: translateY(-20px) rotate(calc(var(--initial-rotation) + 5deg));
+            }
+
+            50% {
+                transform: translateY(0) rotate(var(--initial-rotation));
+            }
+
+            75% {
+                transform: translateY(20px) rotate(calc(var(--initial-rotation) - 5deg));
+            }
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .qr-scan-notice {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Media queries untuk responsivitas */
+        @media (min-width: 640px) {
+            .title-capsule {
+                padding: 0.8rem 2rem;
+            }
+
+            .subtitle-capsule {
+                padding: 0.6rem 1.8rem;
+                width: auto;
+            }
+
+            .source-capsule {
+                padding: 0.6rem 1.5rem;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+
+            .floating-paper {
+                width: 70px !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .title-capsule {
+                font-size: 2.5rem;
+            }
+
+            .subtitle-capsule {
+                text-align: left;
+            }
+
+            .floating-paper {
+                width: 80px !important;
+            }
+
+            .paper-left-1,
+            .paper-left-2,
+            .paper-left-3,
+            .paper-left-4,
+            .paper-left-5,
+            .paper-right-1,
+            .paper-right-2,
+            .paper-right-3,
+            .paper-right-4,
+            .paper-right-5,
+            .paper-center-1,
+            .paper-center-2,
+            .paper-center-3,
+            .paper-center-4 {
+                width: 80px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .title-capsule {
+                font-size: 3rem;
+            }
+
+            .floating-paper {
+                width: 90px !important;
+            }
+
+            .paper-left-1,
+            .paper-left-2,
+            .paper-left-3,
+            .paper-left-4,
+            .paper-left-5,
+            .paper-right-1,
+            .paper-right-2,
+            .paper-right-3,
+            .paper-right-4,
+            .paper-right-5,
+            .paper-center-1,
+            .paper-center-2,
+            .paper-center-3,
+            .paper-center-4 {
+                width: 90px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .subtitle-capsule {
+                display: block;
+                text-align: center;
+                margin: 0 auto 1rem auto;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+
+            .content-container {
+                width: 95%;
+            }
+
+            .flex.items-start {
+                flex-direction: column;
+            }
+
+            .bg-\[#893D23\] {
+                margin-bottom: 1rem;
+            }
+
+            .text-right {
+                text-align: center !important;
+                margin-top: 1rem;
+            }
+
+            .card p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .paper-left-4,
+            .paper-left-5,
+            .paper-right-4,
+            .paper-right-5,
+            .paper-center-3,
+            .paper-center-4 {
+                display: none;
+            }
+
+            .subtitle-container {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+        /* Untuk perangkat sangat kecil */
+        @media (max-width: 360px) {
+            .title-capsule {
+                padding: 0.6rem 1.2rem;
+                font-size: 1.3rem;
+            }
+
+            .subtitle-capsule {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .card p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="py-5 md:py-10 px-4 md:px-5">
+    <!-- Kertas berterbangan di sisi kiri (5 buah) -->
+    <div class="floating-paper paper-left-1" style="--initial-rotation: -5deg;">
+        <img src="./assets/kertas1.png" alt="Kertas 1" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-left-2" style="--initial-rotation: 12deg;">
+        <img src="./assets/kertas2.png" alt="Kertas 2" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-left-3" style="--initial-rotation: -15deg;">
+        <img src="./assets/kertas3.png" alt="Kertas 3" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-left-4" style="--initial-rotation: 8deg;">
+        <img src="./assets/kertas1.png" alt="Kertas 1" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-left-5" style="--initial-rotation: -10deg;">
+        <img src="./assets/kertas2.png" alt="Kertas 2" class="w-full h-full">
+    </div>
+
+    <!-- Kertas berterbangan di sisi kanan (5 buah) -->
+    <div class="floating-paper paper-right-1" style="--initial-rotation: 15deg;">
+        <img src="./assets/kertas3.png" alt="Kertas 3" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-right-2" style="--initial-rotation: -8deg;">
+        <img src="./assets/kertas1.png" alt="Kertas 1" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-right-3" style="--initial-rotation: 5deg;">
+        <img src="./assets/kertas2.png" alt="Kertas 2" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-right-4" style="--initial-rotation: -12deg;">
+        <img src="./assets/kertas3.png" alt="Kertas 3" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-right-5" style="--initial-rotation: 10deg;">
+        <img src="./assets/kertas1.png" alt="Kertas 1" class="w-full h-full">
+    </div>
+
+    <!-- Kertas berterbangan di tengah (4 buah) -->
+    <div class="floating-paper paper-center-1" style="--initial-rotation: 20deg;">
+        <img src="./assets/kertas2.png" alt="Kertas 2" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-center-2" style="--initial-rotation: -18deg;">
+        <img src="./assets/kertas3.png" alt="Kertas 3" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-center-3" style="--initial-rotation: 55deg;">
+        <img src="./assets/kertas2.png" alt="Kertas 1" class="w-full h-full">
+    </div>
+    <div class="floating-paper paper-center-4" style="--initial-rotation: -22deg;">
+        <img src="./assets/kertas1.png" alt="Kertas 2" class="w-full h-full">
+    </div>
+
+    <div class="content-container">
+        <!-- Judul -->
+        <div class="text-center mb-2 md:mb-10">
+            <img src="./assets/judul.png" alt="Kertas 2" class="w-full h-full">
+        </div>
+
+        <!-- Poin 1 -->
+        <div class="mb-8 md:mb-12 relative">
+            <div class="flex flex-col md:flex-row md:items-start">
+                <div
+                    class="bg-[#893D23] text-white rounded-full w-10 h-10 flex items-center justify-center md:mr-4 mt-1 flex-shrink-0 shadow-md self-center md:self-start mb-3 md:mb-0">
+                    1</div>
+                <div class="flex-grow d-flex flex-column justify-content-center">
+                    <div class="subtitle-container">
+                        <h2 class="subtitle-capsule text-lg md:text-xl mb-3 md:mb-4">Tantangan Pendidikan Global</h2>
+                    </div>
+                    <div class="card mb-4 md:mb-5">
+                        <p class="text-base md:text-lg leading-relaxed">Meskipun pendidikan adalah hak dasar, masih
+                            sekitar 4,1 juta anak dan remaja usia 7–18 tahun di Indonesia tidak bersekolah, terutama
+                            mereka dari keluarga miskin, penyandang disabilitas, dan yang tinggal di wilayah terpencil.
+                            Ketimpangan akses pendidikan sangat mencolok, misalnya angka anak tidak sekolah hanya 1,3%
+                            di Yogyakarta namun melonjak hingga 20,7% di Papua. Selain itu, kemampuan akademik dasar
+                            para siswa masih rendah—kurang dari setengah siswa usia 15 tahun mencapai kemahiran minimum
+                            membaca, dan kurang dari sepertiga mencapai kemahiran minimum dalam matematika.</p>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <span class="source-capsule inline-block"
+                            onclick="window.open('https://www.unicef.org/indonesia/id/laporan/profil-pendidikan-di-indonesia', '_blank')">
+                            Sumber: UNICEF <i class="fas fa-external-link-alt ml-2"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Poin 2 -->
+        <div class="mb-8 md:mb-12 relative">
+            <div class="flex flex-col md:flex-row md:items-start">
+                <div
+                    class="bg-[#893D23] text-white rounded-full w-10 h-10 flex items-center justify-center md:mr-4 mt-1 flex-shrink-0 shadow-md self-center md:self-start mb-3 md:mb-0">
+                    2</div>
+                <div class="flex-grow">
+                    <div class="subtitle-container">
+                        <h2 class="subtitle-capsule text-lg md:text-xl mb-3 md:mb-4">Peran Edukasi Digital</h2>
+                    </div>
+                    <div class="card mb-4 md:mb-5">
+                        <p class="text-base md:text-lg leading-relaxed">Edukasi digital berperan sebagai katalis untuk
+                            mencapai SDG 4 (Pendidikan Berkualitas) dengan menghancurkan hambatan geografis dan ekonomi.
+                            Platform digital seperti video pembelajaran, e-learning, dan webinar dapat menjangkau jutaan
+                            pelajar secara simultan, menyediakan konten berkualitas yang dapat diakses kapan saja dan di
+                            mana saja.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Poin 3 -->
+        <div class="mb-8 md:mb-12 relative">
+            <div class="flex flex-col md:flex-row md:items-start">
+                <div
+                    class="bg-[#893D23] text-white rounded-full w-10 h-10 flex items-center justify-center md:mr-4 mt-1 flex-shrink-0 shadow-md self-center md:self-start mb-3 md:mb-0">
+                    3</div>
+                <div class="flex-grow">
+                    <div class="subtitle-container">
+                        <h2 class="subtitle-capsule text-lg md:text-xl mb-3 md:mb-4">Pemahaman melalui konten visual
+                        </h2>
+                    </div>
+                    <div class="card mb-4 md:mb-5">
+                        <p class="text-base md:text-lg leading-relaxed">Menurut Cynthia J. Brame dalam artikelnya
+                            Effective Educational Videos: Principles and Guidelines for Maximizing Student Learning from
+                            Video Content, penggunaan kanal visual dan verbal yang seimbang terbukti efektif dalam
+                            meningkatkan proses belajar.</p>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <span class="source-capsule inline-block"
+                            onclick="window.open('https://cft.vanderbilt.edu/guides-sub-pages/effective-educational-videos/', '_blank')">
+                            Sumber: Brame, 2016 <i class="fas fa-external-link-alt ml-2"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Poin 4 -->
+        <div class="mb-8 md:mb-12 relative">
+            <div class="flex flex-col md:flex-row md:items-start">
+                <div
+                    class="bg-[#893D23] text-white rounded-full w-10 h-10 flex items-center justify-center md:mr-4 mt-1 flex-shrink-0 shadow-md self-center md:self-start mb-3 md:mb-0">
+                    4</div>
+                <div class="flex-grow">
+                    <div class="subtitle-container">
+                        <h2 class="subtitle-capsule text-lg md:text-xl mb-3 md:mb-4">Inovasi Platform YouTube</h2>
+                    </div>
+                    <div class="card mb-4 md:mb-5">
+                        <p class="text-base md:text-lg leading-relaxed">Channel YouTube Kok Bisa (@KokBisa) adalah bukti
+                            nyata peran young changemakers dalam edukasi digital. Dengan format video animasi yang
+                            menarik dan bahasa yang sederhana, mereka menjawab pertanyaan sains dan sosial kompleks.
+                            Konten gratis mereka mendemokratisasi akses ilmu pengetahuan untuk semua kalangan.</p>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <span class="source-capsule inline-block"
+                            onclick="window.open('https://www.youtube.com/@KokBisa', '_blank')">
+                            Sumber: Kok Bisa YouTube <i class="fab fa-youtube ml-2"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-white mt-12 md:mt-20 pb-8 md:pb-10">
+            <p class="text-base md:text-lg">© 2023 Edukasi Digital | Membangun Masa Depan melalui Pendidikan</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animasi scroll halus
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Optimasi untuk perangkat mobile
+        if (window.innerWidth < 768) {
+            // Kurangi jumlah kertas yang ditampilkan di perangkat mobile
+            const papers = document.querySelectorAll('.floating-paper');
+            for (let i = 8; i < papers.length; i++) {
+                papers[i].style.display = 'none';
+            }
+
+            // Kurangi intensitas animasi untuk menghemat baterai
+            const style = document.createElement('style');
+            style.textContent = `
+                @media (prefers-reduced-motion: reduce) {
+                    .floating-paper {
+                        animation: none;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+
+</html>
