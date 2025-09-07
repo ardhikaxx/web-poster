@@ -195,7 +195,7 @@
         /* Kertas tambahan untuk lebih banyak variasi */
         .paper-center-1 {
             width: 50px;
-            top: 13%;
+            top: 19%;
             left: 55%;
             animation-delay: -2.5s;
             transform: rotate(20deg);
@@ -203,7 +203,7 @@
 
         .paper-center-2 {
             width: 65px;
-            top: 54%;
+            top: 57%;
             left: 60%;
             animation-delay: -5.5s;
             transform: rotate(-18deg);
@@ -219,7 +219,7 @@
 
         .paper-center-4 {
             width: 70px;
-            top: 35%;
+            top: 38%;
             left: 45%;
             animation-delay: -1.5s;
             transform: rotate(-22deg);
@@ -262,6 +262,14 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
+        /* Gaya khusus untuk gambar judul */
+        .title-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
         /* Media queries untuk responsivitas */
         @media (min-width: 640px) {
             .title-capsule {
@@ -283,6 +291,10 @@
 
             .floating-paper {
                 width: 70px !important;
+            }
+
+            .title-image {
+                max-width: 85%;
             }
         }
 
@@ -315,6 +327,10 @@
             .paper-center-4 {
                 width: 80px;
             }
+
+            .title-image {
+                max-width: 75%;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -342,6 +358,16 @@
             .paper-center-4 {
                 width: 90px;
             }
+
+            .title-image {
+                max-width: 70%;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .title-image {
+                max-width: 65%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -349,6 +375,10 @@
                 display: block;
                 text-align: center;
                 margin: 0 auto 1rem auto;
+            }
+
+            .title-image {
+                max-width: 95%;
             }
         }
 
@@ -393,6 +423,10 @@
                 justify-content: center;
                 width: 100%;
             }
+
+            .title-image {
+                max-width: 100%;
+            }
         }
 
         /* Untuk perangkat sangat kecil */
@@ -413,6 +447,10 @@
 
             .card p {
                 font-size: 0.9rem;
+            }
+
+            .title-image {
+                max-width: 100%;
             }
         }
     </style>
@@ -468,9 +506,9 @@
     </div>
 
     <div class="content-container">
-        <!-- Judul -->
+        <!-- Judul - Diperbaiki untuk responsivitas -->
         <div class="text-center mb-2 md:mb-10">
-            <img src="./assets/judul.png" alt="Kertas 2" class="w-full h-full">
+            <img src="./assets/judul.png" alt="Edukasi Merata, Masa Depan Setara" class="title-image mx-auto">
         </div>
 
         <!-- Poin 1 -->
